@@ -93,7 +93,7 @@ func (s *Server) Serve(ctx context.Context, callback func(net.PacketConn, net.Ad
 		case <-done:
 			return nil
 		default:
-			buf := bufferPool.Get().([]byte)
+			buf := getBufferFromPool()
 
 			log.Info().Msg("waiting for data")
 			n, addr, err := s.udpConn.ReadFromUDP(buf)
